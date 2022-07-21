@@ -8,13 +8,13 @@
 </head>
 <body>
     <a href="/">Top</a>
-    <a href="/posts/create">New Post</a>
-
+    <a href="/posts/create">Create</a>
+    <h1>Create a new post</h1>
     <form method="POST" action="/posts">
         {{ csrf_field() }}
-        <input type="text" name="title">
-        <input type="text" name="content">
-        <input type="submit">
+        <p>Title:<input type="text" name="title"></p>
+        <p>Content:<textarea name="content" cols="30" rows="10"></textarea ></p>
+        <input type="submit" value="submit">
     </form>
 </body>
 </html>

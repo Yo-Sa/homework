@@ -11,20 +11,21 @@
     <a href="/posts/create">Create</a>
     <h1>Pages#index</h1>
     @foreach($posts as $post)
-        <table>
-            <tr>
-                <td>
-                    <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                </td>
-                <td>
-                    <form class="delete" method="post" action="{{ route('posts.destroy', $post) }}">
-                        @csrf
-                        @method('delete')
-                        <input type="submit" value="delete">
-                    </form>
-                </td>
-            </tr>
-        </table>
+        <div style="display: inline-flex">
+            <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
+            <form method="POST" action="{{ route('posts.edit', $post) }}">
+                @csrf
+                @method('get')
+                <input type="submit" value="edit">
+            </form>
+
+            <form class="delete" method="post" action="{{ route('posts.destroy', $post) }}">
+                @csrf
+                @method('delete')
+                <input type="submit" value="delete">
+            </form>
+        </div>
+        <br>
     @endforeach
 </body>
 </html>

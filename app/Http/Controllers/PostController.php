@@ -61,9 +61,14 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('posts.edit', [
+        'title' => '投稿編集',
+        'post' => $post,
+        ]);
     }
 
     /**
@@ -73,9 +78,18 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        // return 'update:' . $id;
+        // $post = Post::find($id);
+        // $post->update($request->only(['content']));
+        // return redirect()->route('posts.index');
+        $post = Post::find($id);
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->save();
+
+        return redirect()->route('posts.show', ['id' => $post->id])->with('message', 'Post was successfully update!.');
     }
 
     /**
