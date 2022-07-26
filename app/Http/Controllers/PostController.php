@@ -78,18 +78,26 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    // public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         // return 'update:' . $id;
         // $post = Post::find($id);
         // $post->update($request->only(['content']));
         // return redirect()->route('posts.index');
-        $post = Post::find($id);
+        // $post = Post::find($id);
+        // $post->title = $request->input('title');
+        // $post->content = $request->input('content');
+        // $post->save();
+
+        // return redirect()->route('posts.show', ['id' => $post->id])->with('message', 'Post was successfully update!.');
         $post->title = $request->input('title');
         $post->content = $request->input('content');
-        $post->save();
-
-        return redirect()->route('posts.show', ['id' => $post->id])->with('message', 'Post was successfully update!.');
+        if( $post->save()){
+            return redirect('/');
+        }else{
+            return redirect('/posts/update');
+        }
     }
 
     /**
@@ -98,10 +106,15 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    // public function destroy($id)
+    // {
+    //     $post = Post::find($id);
+    //     $post->delete();
+    //     return redirect()->route('posts.index');
+    // }
+    public function destroy(Post $post)
     {
-        $post = Post::find($id);
         $post->delete();
-        return redirect()->route('posts.index');
+        return redirect('/');
     }
 }

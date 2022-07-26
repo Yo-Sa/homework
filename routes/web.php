@@ -12,3 +12,5 @@
 */
 Route::get('/', 'PostController@index');
 Route::resource('posts', 'PostController');
+Route::patch('/post/{post}/update', 'PostController@update');
+Route::delete('/post/{post}/delete', 'PostController@destroy');

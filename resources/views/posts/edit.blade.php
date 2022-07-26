@@ -9,10 +9,18 @@
 <a href="/">Top</a>
 <a href="/posts/create">Create</a>
 <h2>title:{{ $post->title }}</h2>
-<form method="POST" action="{{ route('posts.update', $post) }}">
+{{-- <form method="POST" action="{{ route('posts.update', $post) }}">
     @csrf
     @method('patch')
     <p>Title:<input type="text" name="title" value="{{ $post->title }}"></p>
     <p>Content:<textarea name="content" cols="30" rows="10">{{ $post->content }}</textarea ></p>
     <input type="submit" value="submit">
+</form> --}}
+
+<form action="/post/{{$post->id}}/update" method="post" >
+    {{ csrf_field() }}
+    {{ method_field('patch') }}
+    <input type="text" name="title" value="{{ $post->title }}">
+    <input type="text" name="content" value="{{ $post->title }}">
+    <input type="submit">
 </form>
